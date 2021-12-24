@@ -1,31 +1,29 @@
-## 一款基于vue的ui组件
+# relax-ui
 
-## Installation
+## Project setup
 ```
-npm i yab-ui -S
+yarn install
 ```
 
-### popup 弹出层
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
 
-  arguments:
+### Compiles and minifies for production
+```
+yarn build
+```
 
-   position 弹出框得位置
+### Run your unit tests
+```
+yarn test:unit
+```
 
-  <yab-popup v-model = "show" position = "right"> </yab-popup>
+### Lints and fixes files
+```
+yarn lint
+```
 
-  show: boolean (true: 显示， false：隐藏)
-  
-
-### loading 加载
-   use：
-
-    开启： 
-    this.$loading.show({
-      text: '你的文本内容'
-    })
-
-    关闭
-    this.$loading.hide()
-
-
-  
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
