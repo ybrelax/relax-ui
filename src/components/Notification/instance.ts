@@ -1,4 +1,5 @@
 import { ComponentPublicInstance, createApp } from 'vue'
+import Notice from "./index.vue"
 import bus from './bus'
 
 interface InstanceType extends ComponentPublicInstance {
@@ -18,15 +19,15 @@ let seed = 1
 
 const NotificationInstance = (options: unknown) => {
   // 创建父容器
-  const id = `notify_${seed++}`
+  const id = `notice_${seed++}`
   // 创建通知容器组件
   const root = document.createElement('div')
   root.setAttribute('data-id', id)
-  //  挂载的根节点
+  //  挂载到根节点
   document.body.append(root)
 
   // 创建实例对象
-  const app = createApp(root, options as Record<string, unknown>)
+  const app = createApp(Notice, options as Record<string, unknown>)
   // 将实例对象挂载到根节点
   const instance = app.mount(root) as InstanceType
   // 创建唯一标识
@@ -42,10 +43,14 @@ const NotificationInstance = (options: unknown) => {
   })
   // 加上每个之间的间隔
   verticalOffset += 16
+ // console.log('instance:', instance.)
   // y轴方向的长度
-  instance.position.y = verticalOffset
+  instance.position = {
+    y: verticalOffset,
+    x: 16
+  }
 
-  // 监听notiy传来的关闭时间
+  // 监听notice传来的关闭时间
   bus.$on('closed', (id: string) => {
     // 确保关闭对应的id
     if (instance.id === id) {
