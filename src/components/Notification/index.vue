@@ -3,7 +3,7 @@
     <!-- 弹窗容器 -->
     <div
       ref="container"
-      class = "notice-container"
+      class="notice-container"
       :style="noticeStyle"
       v-show="visible"
       @mouseenter="clearTimer"
@@ -82,11 +82,9 @@
     }
   })
 
-
   onMounted(() => {
     createTimer()
   })
-
 
   // 离开动画结束后
   const afterLeave = () => {
@@ -109,11 +107,10 @@
   }
   // 创建定时器（鼠标移开的时候）
   const createTimer = () => {
-    console.log('创建定时器')
     if (props.autoClose) {
       timer.value = setTimeout(() => {
         visible.value = false
-      })
+      }, props.autoClose)
     }
   }
 
@@ -126,5 +123,11 @@
     if (timer.value) {
       clearTimeout(timer.value)
     }
+  })
+
+  // 暴露给外层组件
+  defineExpose({
+    position,
+    visible
   })
 </script>

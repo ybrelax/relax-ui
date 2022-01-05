@@ -1,5 +1,5 @@
 import { ComponentPublicInstance, createApp } from 'vue'
-import Notice from "./index.vue"
+import Notice from './index.vue'
 import bus from './bus'
 
 interface InstanceType extends ComponentPublicInstance {
@@ -43,12 +43,9 @@ const NotificationInstance = (options: unknown) => {
   })
   // 加上每个之间的间隔
   verticalOffset += 16
- // console.log('instance:', instance.)
+
   // y轴方向的长度
-  instance.position = {
-    y: verticalOffset,
-    x: 16
-  }
+  instance.position.y = verticalOffset
 
   // 监听notice传来的关闭时间
   bus.$on('closed', (id: string) => {
@@ -65,22 +62,20 @@ const NotificationInstance = (options: unknown) => {
 
 // 删除实例
 const remoteInstance = (instance: InstanceType) => {
-  
-  if (!instance ) return
+  if (!instance) return
 
   // 从实例列表中进行删除
   const length = instances.length
   const index = instances.findIndex((item) => item.id === instance.id)
   instances.splice(index, 1)
 
-  if (length <= 1) return;
+  if (length <= 1) return
 
   // 重新获取每个实例的高度
-  const height = instance.height;
-  for (let i = index; i< length -1;i++) {
-    instances[i].position.y = instances[i].position.y - height - 16;
+  const height = instance.height
+  for (let i = index; i < length - 1; i++) {
+    instances[i].position.y = instances[i].position.y - height - 16
   }
-
 }
 
 export default NotificationInstance
